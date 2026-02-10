@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Anitha ❤️ My Forever</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #ff9a9e, #ff4f7b);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  animation: float 8s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes float {
+  0% { transform: translateY(110vh) scale(0.6); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
+}
+
+/* Main Card */
+.card {
+  max-width: 900px;
+  padding: 40px 30px;
+  text-align: center;
+  animation: fadeUp 2s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 25px;
+  background: linear-gradient(90deg, #fff, #ffe1ec);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(255,255,255,0.35);
+}
+
+/* Romantic paragraph */
+p {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  line-height: 2;
+  margin-bottom: 35px;
+  color: #fff;
+  opacity: 0.95;
+}
+
+/* Highlight line */
+.highlight {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  color: #ffe6ef;
+}
+
+/* Countdown */
+.countdown {
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+  letter-spacing: 1px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+button {
+  background: linear-gradient(135deg, #fff, #ffe1ec);
+  color: #ff2f6d;
+  border: none;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.35s ease;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+}
+
+/* YES screen */
+.yes-message {
+  display: none;
+  text-align: center;
+  animation: fadeUp 1.5s ease;
+}
+
+.yes-message h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 25px;
+}
+
+.typing {
+  font-size: 1.6rem;
+  margin-top: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid white;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Tum Hi Ho (hidden player) -->
+<iframe id="music"
+  src="https://www.youtube.com/embed/Umqb9KENgmk?autoplay=0&loop=1&playlist=Umqb9KENgmk"
+  allow="autoplay"
+  style="display:none">
+</iframe>
+
+<script>
+for (let i = 0; i < 45; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = 18 + Math.random() * 28 + "px";
+  heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(heart);
+}
+</script>
+
+<div class="card" id="card" onclick="playMusic()">
+  <h1>Anitha, Will You Be My Valentine?</h1>
+
+  <p>
+    In a world full of noise, you are my calm.  
+    In a life full of moments, you are my favorite one.  
+    Loving you doesn’t feel like a choice —  
+    it feels like destiny quietly choosing me back.
+  </p>
+
+  <div class="highlight">
+    If forever had a feeling… it would feel like you 🤍
+  </div>
+
+  <div class="countdown" id="countdown"></div>
+
+  <div class="buttons">
+    <button onclick="sayYes()">Yes 💖</button>
+    <button onclick="sayYes()">Yes, Always 💍</button>
+  </div>
+</div>
+
+<div class="yes-message" id="yes">
+  <h2>💘 Anitha, You’re My Valentine 💘</h2>
+  <div class="typing" id="typing"></div>
+</div>
+
+<script>
+function playMusic() {
+  document.getElementById("music").src += "&autoplay=1";
+}
+
+function sayYes() {
+  document.getElementById("card").style.display = "none";
+  document.getElementById("yes").style.display = "block";
+  playMusic();
+  startTyping();
+}
+
+function startTyping() {
+  const text = "I love you Anitha, my forever happy place ❤️";
+  let i = 0;
+  const el = document.getElementById("typing");
+  const interval = setInterval(() => {
+    el.textContent += text.charAt(i);
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, 100);
+}
+
+function updateCountdown() {
+  const now = new Date();
+  let year = now.getFullYear();
+  let v = new Date(`February 14, ${year} 00:00:00`);
+  if (now > v) v = new Date(`February 14, ${year+1} 00:00:00`);
+  const d = v - now;
+  const days = Math.floor(d / (1000*60*60*24));
+  const h = Math.floor((d/(1000*60*60))%24);
+  const m = Math.floor((d/(1000*60))%60);
+  const s = Math.floor((d/1000)%60);
+  document.getElementById("countdown").innerHTML =
+    `⏳ ${days} days ${h}h ${m}m ${s}s until our Valentine`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+</body>
+</html>
